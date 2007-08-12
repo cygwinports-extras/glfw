@@ -1,0 +1,9 @@
+category: X11
+requires: cygwin libGL1 libX11_6 libXrandr2
+sdesc: "OpenGL application framework (runtime)"
+ldesc: "GLFW is a free, Open Source, portable framework for OpenGL 
+application development. In short, it is a single library providing a 
+powerful, portable API for otherwise operating system specific tasks 
+such as opening an OpenGL window, and reading keyboard, time, mouse and 
+joystick input. It also provides functions accessing OpenGL extensions, 
+creating and synchronizing threads and reading textures from files."

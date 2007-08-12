@@ -1,0 +1,10 @@
+category: X11
+requires: cygwin glfw mesa-devel libX11-devel libXrandr-devel
+external-source: glfw
+sdesc: "OpenGL application framework (development)"
+ldesc: "GLFW is a free, Open Source, portable framework for OpenGL 
+application development. In short, it is a single library providing a 
+powerful, portable API for otherwise operating system specific tasks 
+such as opening an OpenGL window, and reading keyboard, time, mouse and 
+joystick input. It also provides functions accessing OpenGL extensions, 
+creating and synchronizing threads and reading textures from files."
