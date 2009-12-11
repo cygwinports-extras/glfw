@@ -1,0 +1,27 @@
+--- origsrc/glfw/compile.sh	2007-07-01 04:46:46.000000000 -0500
++++ src/glfw/compile.sh	2007-09-01 23:27:59.906250000 -0500
+@@ -88,6 +89,12 @@
+   LDFLAGS="-shared"
+   echo " Linux" 1>&6
+   ;;
++xCYGWIN*)
++  CFLAGS="$CFLAGS"
++  LDFLAGS="-shared -Wl,--out-implib,libglfw.dll.a"
++  PIC=""
++  echo " Cygwin" 1>&6
++  ;;
+ xDarwin)
+   CFLAGS="$CFLAGS"
+   LDFLAGS="-flat_namespace -undefined suppress"
+--- origsrc/glfw/lib/x11/Makefile.x11.in	2007-07-01 04:46:46.000000000 -0500
++++ src/glfw/lib/x11/Makefile.x11.in	2007-09-01 23:25:29.203125000 -0500
+@@ -105,7 +105,8 @@
+ # Rule for building shared library
+ ##########################################################################
+ libglfw.so: $(SHARED_OBJS)
+-	$(CC) $(LDFLAGS) -o $@ $(SHARED_OBJS) $(LFLAGS) $(LIBS)
++	$(CC) $(LDFLAGS) -o cygglfw.dll $(SHARED_OBJS) $(LFLAGS) $(LIBS)
++	touch $@
+ 
+ 
+ ##########################################################################
