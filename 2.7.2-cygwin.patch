@@ -1,0 +1,36 @@
+--- origsrc/glfw-2.7.2/compile.sh	2011-06-27 22:55:28.000000000 -0500
++++ src/glfw-2.7.2/compile.sh	2011-10-01 23:38:47.444904400 -0500
+@@ -91,6 +91,10 @@ xLinux)
+   SOFLAGS="-shared -Wl,-soname,libglfw.so"
+   echo "Linux" 1>&6
+   ;;
++xCYGWIN*)
++  SOFLAGS="-shared -Wl,--out-implib,libglfw.dll.a"
++  echo "Cygwin" 1>&6
++  ;;
+ xDarwin)
+   SOFLAGS="-flat_namespace -undefined suppress"
+   echo "Mac OS X" 1>&6
+--- origsrc/glfw-2.7.2/include/GL/glfw.h	2011-07-26 18:59:00.000000000 -0500
++++ src/glfw-2.7.2/include/GL/glfw.h	2011-10-01 23:37:34.717577600 -0500
+@@ -61,7 +61,7 @@ extern "C" {
+  * to the list of "valid Win32 identifiers", which removes the need for
+  * -mwin32)
+  */
+-#if !defined(_WIN32) && (defined(__WIN32__) || defined(WIN32) || defined(__CYGWIN__))
++#if !defined(_WIN32) && (defined(__WIN32__) || defined(WIN32))
+  #define _WIN32
+ #endif /* _WIN32 */
+ 
+--- origsrc/glfw-2.7.2/lib/x11/Makefile.x11.in	2009-11-08 13:22:48.000000000 -0600
++++ src/glfw-2.7.2/lib/x11/Makefile.x11.in	2011-10-01 23:37:54.701212400 -0500
+@@ -119,7 +119,8 @@ libglfw.a: $(STATIC_OBJS)
+ # Rule for building shared library
+ ##########################################################################
+ libglfw.so: $(SHARED_OBJS)
+-	$(CC) $(SOFLAGS) -o $@ $(SHARED_OBJS) $(LFLAGS) $(LIBS)
++	$(CC) $(SOFLAGS) -o cygglfw-2.dll $(SHARED_OBJS) $(LFLAGS) $(LIBS)
++	ln -s libglfw.dll.a $@
+ 
+ 
+ ##########################################################################

@@ -1,5 +1,5 @@
 category: X11
-requires: libgcc1 libGL1 libX11_6 libXrandr2
+requires: libGL1 libX11_6 libXrandr2
 external-source: glfw
 sdesc: "OpenGL application framework (runtime)"
 ldesc: "GLFW is a free, Open Source, portable framework for OpenGL 

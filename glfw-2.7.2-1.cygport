@@ -1,19 +1,17 @@
 DESCRIPTION="OpenGL cross-platform application framework"
 HOMEPAGE="http://glfw.sourceforge.net/"
 SRC_URI="mirror://sourceforge/${PN}/${P}.tar.bz2"
-SRC_DIR="${PN}"
+PATCH_URI="2.7.2-cygwin.patch"
 
-PATCH_URI="2.6-cygwin-dll.patch"
-
-PKG_NAMES="${PN} libglfw libglfw-devel"
-libglfw_CONTENTS='usr/bin/ usr/share/'
+PKG_NAMES="libglfw2 libglfw-devel"
+libglfw2_CONTENTS='usr/bin/cygglfw-2.dll usr/share/'
 libglfw_devel_CONTENTS='usr/include/ usr/lib/'
 
 src_compile() {
 	lndirs
 
 	cd ${B}
-	./compile.sh || error "compile.sh failed"
+	sh ./compile.sh || error "compile.sh failed"
 	cygmake -j1 x11
 
 	cd ${B}/lib/x11
@@ -22,14 +20,13 @@ src_compile() {
 
 src_install() {
 	cd ${B}
-	dobin lib/x11/cygglfw.dll
+	dobin lib/x11/cygglfw-2.dll
 	dolib lib/x11/*.a
 
-	insinto /usr/include/GL
-	doins include/GL/glfw.h
+	includeinto GL
+	doinclude include/GL/glfw.h
 
-	insinto /usr/lib/pkgconfig
-	doins lib/x11/libglfw.pc
+	dopkgconfig lib/x11/libglfw.pc
 
 	dodoc license.txt docs/readme.txt
 }
